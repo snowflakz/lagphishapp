@@ -43,17 +43,19 @@ const Home = () => {
 
       {/* Main Content Section */}
       <div className="relative z-10 container mx-auto px-4 py-16 text-white text-center flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fadeInDown text-center">
-          Seamless Cybersecurity for IWLH, from Phish to Fortification:
-          <br />
-          Cyber Safety is Patient Safety
-        </h1>
-        <p className="text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto animate-fadeInUp delay-1s text-center">
-          Unify your knowledgebase, training, and learning management system in one place. Your essential tool for daily operations and professional growth.
-        </p>
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fadeInDown text-center">
+            Seamless Cybersecurity for IWLH, from Phish to Fortification:
+            <br />
+            Cyber Safety is Patient Safety
+          </h1>
+          <p className="text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto animate-fadeInUp delay-1s text-center">
+            Unify your knowledgebase, training, and learning management system in one place. Your essential tool for daily operations and professional growth.
+          </p>
+        </div>
 
         {/* Feature Cards Section (positioned over the background image) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-48">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-0">
           <div 
             className="bg-white bg-opacity-90 rounded-xl shadow-lg p-8 flex flex-col items-center cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl hover:bg-teal-50"
             onClick={() => navigate('/knowledgebase')}
