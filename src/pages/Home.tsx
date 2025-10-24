@@ -45,12 +45,12 @@ const Home = () => {
       <div className="relative z-10 container mx-auto px-4 py-16 text-white text-center flex flex-col items-center justify-center min-h-screen">
         <div className="flex flex-col items-center justify-center min-h-screen">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fadeInDown text-center">
-            Seamless Cybersecurity for IWLH, from Phish to Fortification:
+            Building A Culture Of Security In IWLH, From Phish To Fortification.
             <br />
-            Cyber Safety is Patient Safety
+            Cyber Safety Is Patient Safety.
           </h1>
           <p className="text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto animate-fadeInUp delay-1s text-center">
-            Unify your knowledgebase, training, and learning management system in one place. Your essential tool for daily operations and professional growth.
+            Unify your training, skills, knowledge, and learning with our learning portal. Empowering success through efficient training and professional development.
           </p>
         </div>
 
