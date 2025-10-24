@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Shield, 
-  Home, 
+  Home as HomeIcon, // Alias Home icon from lucide-react
   BookOpen, 
   HelpCircle, 
   Database, 
@@ -16,7 +16,9 @@ import {
   ExternalLink,
   Mail,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  LayoutGrid, // New import for Hub icon
+  GraduationCap // New import for LMS icon
 } from 'lucide-react';
 import { Routes, Route, Link } from 'react-router-dom';
 import TrainingMaterials from './pages/TrainingMaterials';
@@ -43,18 +45,22 @@ import TwoFactorAuthenticationSetupGuide from './pages/knowledgebase/TwoFactorAu
 import RemoteWorkSecurityGuidelines from './pages/knowledgebase/RemoteWorkSecurityGuidelines';
 import IncidentResponseProceduresKB from './pages/knowledgebase/IncidentResponseProcedures';
 import JCICybersecurityRequirements from './pages/knowledgebase/JCICybersecurityRequirements';
+import Home from './pages/Home'; // New import for the new Home component
+import Hub from './pages/Hub'; // Import for the renamed Index component (now Hub)
+import Resources from './pages/Resources'; // New import for the Resources component
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const navigation = [
-    { name: 'Home', to: '/', icon: Home },
-    { name: 'Training Materials', to: '/training', icon: BookOpen },
+    { name: 'Home', to: '/', icon: HomeIcon }, // Use aliased HomeIcon
+    { name: 'Hub', to: '/hub', icon: LayoutGrid }, // Renamed from Index to Hub, using aliased HomeIcon
+    { name: 'LMS', to: 'https://alison.com/lms/login', icon: GraduationCap, external: true }, // Added LMS to navigation
+    { name: 'Resources', to: '/resources', icon: BookOpen }, // Added Resources to navigation
     { name: 'FAQ', to: '/faq', icon: HelpCircle },
     { name: 'Knowledgebase', to: '/knowledgebase', icon: Database },
     { name: 'Podcast', to: '/podcast', icon: Radio },
-    { name: 'JCI', to: '/jci', icon: Award },
     { name: 'Contact', to: '/contact', icon: Phone },
   ];
 
@@ -294,7 +300,7 @@ function App() {
             <div className="flex justify-between h-16">
               <div className="flex items-center">
                 <Shield className="h-8 w-8 text-teal-600 mr-3" />
-                <span className="text-xl font-bold text-gray-900">IWLH CyberSecure Health</span>
+                <span className="text-xl font-bold text-gray-900 whitespace-nowrap">IWLH CyberSecure Health</span> {/* Added whitespace-nowrap */}
               </div>
               
               {/* Desktop Navigation */}
@@ -303,6 +309,8 @@ function App() {
                   <Link
                     key={item.name}
                     to={item.to}
+                    target={item.external ? '_blank' : ''} // Add target="_blank" for external links
+                    rel={item.external ? 'noopener noreferrer' : ''} // Add rel for external links
                     className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-md transition-colors duration-200"
                   >
                     <item.icon className="h-4 w-4 mr-2" />
@@ -331,6 +339,8 @@ function App() {
                   <Link
                     key={item.name}
                     to={item.to}
+                    target={item.external ? '_blank' : ''} // Add target="_blank" for external links
+                    rel={item.external ? 'noopener noreferrer' : ''} // Add rel for external links
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center w-full px-3 py-2 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-md transition-colors duration-200"
                   >
@@ -344,43 +354,8 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={
-            <section id="home" className="relative min-h-screen flex items-center justify-center">
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: 'url(/background.png)'
-                }}
-              >
-                <div className="absolute inset-0 bg-slate-800 bg-opacity-75"></div>
-              </div>
-              <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-                <div className="bg-red-600 text-white px-6 py-4 rounded-lg mb-8 shadow-2xl">
-                  <AlertTriangle className="h-12 w-12 mx-auto mb-4" />
-                  <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-                    Oops!  You Just Compromised Your Device And Our Entire Network!
-                  </h1>
-                  <p className="text-xl sm:text-2xl mb-6">
-                    This was an approved phishing simulation run as part of a security awareness training exercise,  if it were real, your device and our entire network could be at risk.
-                  </p>
-                </div>
-                <div className="bg-white bg-opacity-95 p-8 rounded-lg shadow-2xl">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                    Don't Worry - We're Here to Help
-                  </h2>
-                  <p className="text-lg text-gray-700 mb-8">
-                    Kindly enroll  for our training to strengthen your understanding of cyber threats, effective defense tactics, and cybersecurity hygiene to protecting yourself and our network from furture phishing attempt. Feel free to explore this Training Portal or chat with our bot for more insights into NDPA, JCI, Cybersecurity, Data Privacy and Confidentiality.
-                  </p>
-                  <button
-                    onClick={() => window.open('https://forms.office.com/r/wNF8ANs1xu', '_blank', 'noopener,noreferrer')}
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-                  >
-                    Register
-                  </button>
-                </div>
-              </div>
-            </section>
-          } />
+          <Route path="/" element={<Home />} /> {/* Render Home component for root path */}
+          <Route path="/hub" element={<Hub />} /> {/* Render Hub component for /hub route */}
           <Route path="/register" element={<Registration />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/training" element={<TrainingMaterials />} />
@@ -389,6 +364,7 @@ function App() {
           <Route path="/podcast" element={<Podcast />} />
           <Route path="/jci" element={<JCICompliance />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/resources" element={<Resources />} /> {/* Route for Resources component */}
           <Route path="/courses/phishing-awareness" element={<PhishingAwarenessTraining />} />
           <Route path="/courses/password-security" element={<PasswordSecurityBestPractices />} />
           <Route path="/courses/safe-browsing" element={<SafeBrowsingTechniques />} />
